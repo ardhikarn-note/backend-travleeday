@@ -11,4 +11,7 @@ module.exports = {
   viewItems: (req, res) => {
     res.render("admin/items/view_items");
   },
+  viewBookings: (req, res) => {
+    res.render("admin/bookings/view_bookings");
+  },
 };
