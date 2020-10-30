@@ -1,22 +1,22 @@
-import mongoose from 'mongoose'
+const mongoose = require("mongoose");
 
 const activitySchema = new mongoose.Schema({
-  name = {
+  name: {
     type: String,
-    required: true
+    required: true,
   },
-  type = {
+  type: {
     type: String,
-    required: true
+    required: true,
   },
-  imageUrl = {
+  imageUrl: {
     type: String,
-    required: true
+    required: true,
   },
-  isPopular = {
+  isPopular: {
     type: Boolean,
-    required: true
+    required: true,
   },
-})
+});
 
-module.exports = mongoose.model('Activity', activitySchema)
+module.exports = mongoose.model("Activity", activitySchema);

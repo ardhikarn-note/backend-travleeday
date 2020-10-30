@@ -1,42 +1,48 @@
-import mongoose from 'mongoose'
-const { ObjectId } = mongoose.Schema
+const mongoose = require("mongoose");
+const { ObjectId } = mongoose.Schema;
 
 const itemSchema = new mongoose.Schema({
-  title = {
+  title: {
     type: String,
-    required: true
+    required: true,
   },
-  price = {
+  price: {
     type: Number,
-    required: true
+    required: true,
   },
-  country = {
+  country: {
     type: String,
-    default: 'Indonesia'
+    default: "Indonesia",
   },
-  city = {
+  city: {
     type: String,
-    required: true
+    required: true,
   },
-  isPopular = {
+  isPopular: {
     type: Boolean,
   },
-  description = {
+  description: {
     type: String,
-    required: true
+    required: true,
   },
-  imageId = [{
-    type: ObjectId,
-    ref: 'Image'
-  }],
-  featureId = [{
-    type: ObjectId,
-    ref: 'Feature'
-  }],
-  activityId = [{
-    type: ObjectId,
-    ref: 'Activity'
-  }],
-})
+  imageId: [
+    {
+      type: ObjectId,
+      ref: "Image",
+    },
+  ],
+  featureId: [
+    {
+      type: ObjectId,
+      ref: "Feature",
+    },
+  ],
+  activityId: [
+    {
+      type: ObjectId,
+      ref: "Activity",
+    },
+  ],
+});
 
-module.exports = mongoose.model('Item', itemSchema)
+module.exports = mongoose.model("Item", itemSchema);

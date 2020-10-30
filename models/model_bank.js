@@ -1,18 +1,18 @@
-import mongoose from 'mongoose'
+const mongoose = require("mongoose");
 
 const bankSchema = new mongoose.Schema({
-  nameBank = {
+  nameBank: {
     type: String,
-    required: true
+    required: true,
   },
-  noRek = {
+  noRek: {
     type: String,
-    required: true
+    required: true,
   },
-  name = {
+  name: {
     type: String,
-    required: true
+    required: true,
   },
-})
+});
 
-module.exports = mongoose.model('Bank', bankSchema)
+module.exports = mongoose.model("Bank", bankSchema);

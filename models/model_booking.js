@@ -1,12 +1,12 @@
-import mongoose from 'mongoose'
+const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema
 
 const bookingSchema = new mongoose.Schema({
-  bookingStartDate = {
+  bookingStartDate: {
     type: Date,
     required: true
   },
-  bookingEndDate = {
+  bookingEndDate: {
     type: Date,
     required: true
   },
@@ -25,31 +25,31 @@ const bookingSchema = new mongoose.Schema({
       required: true
     }
   }],
-  memberId = [{
+  memberId: [{
     type: ObjectId,
     ref: 'Member'
   }],
-  bankId = [{
+  bankId: [{
     type: ObjectId,
     ref: 'Bank'
   }],
-  proofPayment = {
+  proofPayment: {
     type: String,
     required: true
   },
-  bankFrom = {
+  bankFrom: {
     type: String,
     required: true
   },
-  accountHolder = {
+  accountHolder: {
     type: String,
     required: true
   },
-  imageUrl = {
+  imageUrl: {
     type: String,
     required: true
   },
-  status = {
+  status: {
     type: String,
     required: true
   },

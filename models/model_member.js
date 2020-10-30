@@ -1,22 +1,22 @@
-import mongoose from 'mongoose'
+const mongoose = require("mongoose");
 
 const memberSchema = new mongoose.Schema({
-  firstName = {
+  firstName: {
     type: String,
-    required: true
+    required: true,
   },
-  lastName = {
+  lastName: {
     type: String,
-    required: true
+    required: true,
   },
-  email = {
+  email: {
     type: String,
-    required: true
+    required: true,
   },
-  phone = {
+  phone: {
     type: String,
-    required: true
+    required: true,
   },
-})
+});
 
-module.exports = mongoose.model('Member', memberSchema)
+module.exports = mongoose.model("Member", memberSchema);
