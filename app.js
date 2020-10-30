@@ -13,7 +13,7 @@ mongoose.connect("mongodb://localhost:27017/db_travleeday", {
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
-const adminRouter = require("./routes/route_admin");
+const routerNavigation = require("./routes/routerNavigation");
 
 const app = express();
 
@@ -33,7 +33,7 @@ app.use(
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/admin", adminRouter);
+app.use("/", routerNavigation);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
