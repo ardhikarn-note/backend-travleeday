@@ -5,4 +5,7 @@ module.exports = {
   viewCategories: (req, res) => {
     res.render("admin/categories/view_categories");
   },
+  viewBanks: (req, res) => {
+    res.render("admin/banks/view_banks");
+  },
 };
