@@ -8,4 +8,7 @@ module.exports = {
   viewBanks: (req, res) => {
     res.render("admin/banks/view_banks");
   },
+  viewItems: (req, res) => {
+    res.render("admin/items/view_items");
+  },
 };
