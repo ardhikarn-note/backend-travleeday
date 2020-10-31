@@ -2,21 +2,64 @@ const modelCategory = require("../../models/model_category");
 
 module.exports = {
   viewCategories: async (req, res) => {
-    const category = await modelCategory.find();
-    res.render("admin/categories/view_categories", { category });
+    try {
+      const category = await modelCategory.find();
+      const alertMsg = req.flash("alertMessage");
+      const alertStatus = req.flash("alertStatus");
+      const alert = { msg: alertMsg, status: alertStatus };
+      const title = "Travleeday | Categories";
+      res.render("admin/categories/view_categories", {
+        category,
+        alert,
+        title,
+      });
+    } catch (error) {
+      res.redirect("/admin/categories");
+    }
   },
 
   addCategory: async (req, res) => {
-    const { name } = req.body;
-    await modelCategory.create({ name });
-    res.redirect("/admin/categories");
+    try {
+      const { name } = req.body;
+      await modelCategory.create({ name });
+      req.flash("alertMessage", "Success Add Category");
+      req.flash("alertStatus", "success");
+      res.redirect("/admin/categories");
+    } catch (error) {
+      req.flash("alertMessage", `$error.msg`);
+      req.flash("alertStatus", "danger");
+      res.redirect("/admin/categories");
+    }
   },
 
   editCategory: async (req, res) => {
-    const { id, name } = req.body;
-    const category = await modelCategory.findOne({ _id: id });
-    category.name = name;
-    await category.save();
-    res.redirect("/admin/categories");
+    try {
+      const { id, name } = req.body;
+      const category = await modelCategory.findOne({ _id: id });
+      category.name = name;
+      await category.save();
+      req.flash("alertMessage", "Success Update Category");
+      req.flash("alertStatus", "success");
+      res.redirect("/admin/categories");
+    } catch (error) {
+      req.flash("alertMessage", `$error.msg`);
+      req.flash("alertStatus", "danger");
+      res.redirect("/admin/categories");
+    }
+  },
+
+  deleteCategory: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const category = await modelCategory.findOne({ _id: id });
+      await category.remove();
+      req.flash("alertMessage", "Success Delete Category");
+      req.flash("alertStatus", "success");
+      res.redirect("/admin/categories");
+    } catch (error) {
+      req.flash("alertMessage", `$error.msg`);
+      req.flash("alertStatus", "danger");
+      res.redirect("/admin/categories");
+    }
   },
 };
