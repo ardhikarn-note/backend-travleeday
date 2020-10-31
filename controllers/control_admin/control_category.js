@@ -11,4 +11,12 @@ module.exports = {
     await modelCategory.create({ name });
     res.redirect("/admin/categories");
   },
+
+  editCategory: async (req, res) => {
+    const { id, name } = req.body;
+    const category = await modelCategory.findOne({ _id: id });
+    category.name = name;
+    await category.save();
+    res.redirect("/admin/categories");
+  },
 };

@@ -65,5 +65,16 @@
     </div>
   </div>
 
-  <%- include('modal_category.ejs') %>
+  <%- include('addModal_category.ejs') %>
+  <%- include('editModal_category.ejs') %>
   <%- include('../../partials/js.ejs') %>
+
+  <script>
+    $('#dataTable').on('click', '.btn-update', function() {
+      let id = $(this).data('id');
+      let name = $(this).data('name')
+      $('#edit-modal').modal('show')
+      $('.id').val(id)
+      $('.name').val(name)
+    })
+  </script>
