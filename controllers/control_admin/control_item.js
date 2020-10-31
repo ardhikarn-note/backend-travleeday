@@ -1,5 +1,6 @@
 module.exports = {
   viewItems: (req, res) => {
-    res.render("admin/items/view_items");
+    const title = "Travleeday | Items";
+    res.render("admin/items/view_items", { title });
   },
 };

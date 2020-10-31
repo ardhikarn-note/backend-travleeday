@@ -1,5 +1,6 @@
 module.exports = {
   viewBookings: (req, res) => {
-    res.render("admin/bookings/view_bookings");
+    const title = "Travleeday | Bookings";
+    res.render("admin/bookings/view_bookings", { title });
   },
 };
