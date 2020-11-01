@@ -3,16 +3,29 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit Category</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Edit Bank</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="/admin/categories?_method=PUT" method="POST">
+      <form action="/admin/banks?_method=PUT" method="POST" enctype="multipart/form-data">
         <div class="modal-body">
           <div class="form-group">
-            <label for="name">Name Category</label>
-            <input type="text" class="form-control name" name="name" placeholder="Enter New Name Category" required>
+            <label for="name">Bank Name</label>
+            <input type="text" class="form-control nameBank" name="nameBank" placeholder="Enter Bank" required>
+          </div>
+          <div class="form-group">
+            <label for="name">Account Number</label>
+            <input type="text" class="form-control noRek" name="noRek" placeholder="Enter Account Number" required>
+          </div>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control name" name="name" placeholder="Enter Name" required>
+          </div>
+          <div class="form-group">
+            <label for="name">Image</label>
+            <input type="file" class="form-control" name="image">
+            <span>Choose your image</span>
           </div>
         </div>
         <div class="modal-footer">

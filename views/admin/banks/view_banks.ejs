@@ -66,4 +66,19 @@
   </div>
 
   <%- include('addModal_bank.ejs') %>
+  <%- include('editModal_bank.ejs') %>
   <%- include('../../partials/js.ejs') %>
+
+  <script>
+    $('#dataTable').on('click', '.btn-update', function() {
+      let id = $(this).data('id');
+      let name = $(this).data('name')
+      let nameBank = $(this).data('namebank') // name data-namebank must lowercase
+      let noRek = $(this).data('norek') // name data-norek must lowercase
+      $('#edit-modal-bank').modal('show')
+      $('.id').val(id)
+      $('.name').val(name)
+      $('.nameBank').val(nameBank)
+      $('.noRek').val(noRek)
+    })
+  </script>

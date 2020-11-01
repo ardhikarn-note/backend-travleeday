@@ -29,8 +29,8 @@
                 <img src="http://localhost:3000/<%= bank[i].imageUrl %>" alt="imageUrl" height="70px" width="120px" style="object-fit: cover;">
               </td>
               <td>
-                <form action="/admin/categories/<%= bank[i].id %>?_method=DELETE" method="POST">
-                  <a href="javascript:void()" type="button" class="btn btn-warning btn-circle btn-sm btn-update" data-id="<%= bank[i].id %>" data-name="<%= bank[i].name%>"><i class="fas fa-edit"></i></a>
+                <form action="/admin/banks/<%= bank[i].id %>?_method=DELETE" method="POST">
+                  <a href="javascript:void()" type="button" class="btn btn-warning btn-circle btn-sm btn-update" data-id="<%= bank[i].id %>" data-name="<%= bank[i].name %>" data-namebank="<%= bank[i].nameBank %>" data-norek="<%= bank[i].noRek %>"><i class="fas fa-edit"></i></a>
                   <button href="" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></button>
                 </form>
               </td>
