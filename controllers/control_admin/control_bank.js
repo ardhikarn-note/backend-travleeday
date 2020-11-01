@@ -66,4 +66,20 @@ module.exports = {
       res.redirect("/admin/banks");
     }
   },
+
+  deleteBank: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const bank = await modelBank.findOne({ _id: id });
+      await fs.unlink(path.join(`uploads/${bank.imageUrl}`));
+      await bank.remove();
+      req.flash("alertMessage", "Success Delete Bank");
+      req.flash("alertStatus", "success");
+      res.redirect("/admin/banks");
+    } catch (error) {
+      req.flash("alertMessage", `${error.msg}`);
+      req.flash("alertStatus", "danger");
+      res.redirect("/admin/banks");
+    }
+  },
 };
