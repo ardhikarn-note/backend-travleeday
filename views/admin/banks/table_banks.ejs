@@ -14,9 +14,29 @@
             <th>Bank Name</th>
             <th>Account Number</th>
             <th>Name</th>
+            <th>Bank Image</th>
             <th>Action</th>
           </tr>
         </thead>
+        <tbody>
+          <% for(i = 0 ; i < bank.length ; i++){ %>
+            <tr>
+              <td><%= i+1 %></td>
+              <td><%= bank[i].nameBank %></td>
+              <td><%= bank[i].noRek %></td>
+              <td><%= bank[i].name %></td>
+              <td class="text-center">
+                <img src="http://localhost:3000/<%= bank[i].imageUrl %>" alt="imageUrl" height="70px" width="120px" style="object-fit: cover;">
+              </td>
+              <td>
+                <form action="/admin/categories/<%= bank[i].id %>?_method=DELETE" method="POST">
+                  <a href="javascript:void()" type="button" class="btn btn-warning btn-circle btn-sm btn-update" data-id="<%= bank[i].id %>" data-name="<%= bank[i].name%>"><i class="fas fa-edit"></i></a>
+                  <button href="" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></button>
+                </form>
+              </td>
+            </tr>
+          <% } %>
+        </tbody>
       </table>
     </div>
   </div>

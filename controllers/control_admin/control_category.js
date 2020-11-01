@@ -14,6 +14,8 @@ module.exports = {
         title,
       });
     } catch (error) {
+      req.flash("alertMessage", `${error.msg}`);
+      req.flash("alertStatus", "danger");
       res.redirect("/admin/categories");
     }
   },

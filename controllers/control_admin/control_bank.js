@@ -3,11 +3,12 @@ const modelBank = require("../../models/model_bank");
 module.exports = {
   viewBanks: async (req, res) => {
     try {
+      const bank = await modelBank.find(); // for Read bank
       const alertMsg = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");
       const alert = { msg: alertMsg, status: alertStatus };
       const title = "Travleeday | Banks";
-      res.render("admin/banks/view_banks", { title, alert });
+      res.render("admin/banks/view_banks", { title, alert, bank });
     } catch (error) {
       req.flash("alertMessage", `${error.msg}`);
       req.flash("alertStatus", "danger");
