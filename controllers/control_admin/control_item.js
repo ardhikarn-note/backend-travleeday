@@ -20,7 +20,14 @@ module.exports = {
       const alertStatus = req.flash("alertStatus");
       const alert = { msg: alertMsg, status: alertStatus };
       const title = "Travleeday | Items";
-      res.render("admin/items/view_items", { category, alert, title, item });
+      const action = "view";
+      res.render("admin/items/view_items", {
+        category,
+        alert,
+        title,
+        item,
+        action,
+      });
     } catch (error) {
       req.flash("alertMessage", `${error.msg}`);
       req.flash("alertStatus", "danger");
@@ -55,6 +62,31 @@ module.exports = {
         req.flash("alertStatus", "success");
         res.redirect("/admin/items");
       }
+    } catch (error) {
+      req.flash("alertMessage", `${error.msg}`);
+      req.flash("alertStatus", "danger");
+      res.redirect("/admin/items");
+    }
+  },
+
+  showImageItem: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const item = await modelItem.findOne({ _id: id }).populate({
+        path: "imageId",
+        select: "id imageUrl",
+      }); // for Read Item
+      const alertMsg = req.flash("alertMessage");
+      const alertStatus = req.flash("alertStatus");
+      const alert = { msg: alertMsg, status: alertStatus };
+      const title = "Travleeday | Show Image Item";
+      const action = "show image";
+      res.render("admin/items/view_items", {
+        alert,
+        title,
+        item,
+        action,
+      });
     } catch (error) {
       req.flash("alertMessage", `${error.msg}`);
       req.flash("alertStatus", "danger");
