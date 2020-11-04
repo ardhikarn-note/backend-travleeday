@@ -1,6 +1,8 @@
 const modelItem = require("../../models/model_item");
 const modelCategory = require("../../models/model_category");
 const modelImage = require("../../models/model_image");
+const fs = require("fs-extra");
+const path = require("path");
 
 module.exports = {
   viewItems: async (req, res) => {
@@ -120,6 +122,56 @@ module.exports = {
         item,
         action,
       });
+    } catch (error) {
+      req.flash("alertMessage", `${error.msg}`);
+      req.flash("alertStatus", "danger");
+      res.redirect("/admin/items");
+    }
+  },
+
+  editItem: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { categoryId, title, price, city, description } = req.body;
+      const item = await modelItem
+        .findOne({ _id: id })
+        .populate({
+          path: "imageId",
+          select: "id imageUrl",
+        })
+        .populate({
+          path: "categoryId",
+          select: "id name",
+        }); // for Read Item
+      if (req.files.length > 0) {
+        for (i = 0; i < item.imageId.length; i++) {
+          const imageUpdate = await modelImage.findOne({
+            _id: item.imageId[i]._id,
+          });
+          await fs.unlink(path.join(`uploads/${imageUpdate.imageUrl}`));
+          imageUpdate.imageUrl = `uploadMultiple/${req.files[i].filename}`;
+          await imageUpdate.save();
+        }
+        (item.title = title),
+          (item.price = price),
+          (item.city = city),
+          (item.description = description),
+          (item.categoryId = categoryId);
+        await item.save();
+        req.flash("alertMessage", "Success Update Item");
+        req.flash("alertStatus", "success");
+        res.redirect("/admin/items");
+      } else {
+        (item.title = title),
+          (item.price = price),
+          (item.city = city),
+          (item.description = description),
+          (item.categoryId = categoryId);
+        await item.save();
+        req.flash("alertMessage", "Success Update Item");
+        req.flash("alertStatus", "success");
+        res.redirect("/admin/items");
+      }
     } catch (error) {
       req.flash("alertMessage", `${error.msg}`);
       req.flash("alertStatus", "danger");
