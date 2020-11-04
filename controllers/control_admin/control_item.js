@@ -5,12 +5,22 @@ const modelImage = require("../../models/model_image");
 module.exports = {
   viewItems: async (req, res) => {
     try {
+      const item = await modelItem
+        .find()
+        .populate({
+          path: "imageId",
+          select: "id imageUrl",
+        })
+        .populate({
+          path: "categoryId",
+          select: "id name",
+        }); // for Read Item
       const category = await modelCategory.find();
       const alertMsg = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");
       const alert = { msg: alertMsg, status: alertStatus };
       const title = "Travleeday | Items";
-      res.render("admin/items/view_items", { category, alert, title });
+      res.render("admin/items/view_items", { category, alert, title, item });
     } catch (error) {
       req.flash("alertMessage", `${error.msg}`);
       req.flash("alertStatus", "danger");
