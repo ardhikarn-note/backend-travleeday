@@ -3,7 +3,7 @@ const modelCategory = require("../../models/model_category");
 module.exports = {
   viewCategories: async (req, res) => {
     try {
-      const category = await modelCategory.find();
+      const category = await modelCategory.find(); // for Read Category
       const alertMsg = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");
       const alert = { msg: alertMsg, status: alertStatus };
