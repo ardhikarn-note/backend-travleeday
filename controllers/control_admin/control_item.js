@@ -178,4 +178,32 @@ module.exports = {
       res.redirect("/admin/items");
     }
   },
+
+  deleteItem: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const item = await modelItem.findOne({ _id: id }).populate("imageId"); // for Read Item
+      for (i = 0; i < item.imageId.length; i++) {
+        modelImage
+          .findOne({ _id: item.imageId[i]._id })
+          .then((image) => {
+            fs.unlink(path.join(`uploads/${image.imageUrl}`));
+            image.remove();
+          })
+          .catch((error) => {
+            req.flash("alertMessage", `${error.msg}`);
+            req.flash("alertStatus", "danger");
+            res.redirect("/admin/items");
+          });
+      }
+      await item.remove();
+      req.flash("alertMessage", "Success Delete Item");
+      req.flash("alertStatus", "success");
+      res.redirect("/admin/items");
+    } catch (error) {
+      req.flash("alertMessage", `${error.msg}`);
+      req.flash("alertStatus", "danger");
+      res.redirect("/admin/items");
+    }
+  },
 };
