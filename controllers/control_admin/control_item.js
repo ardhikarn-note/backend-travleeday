@@ -214,11 +214,13 @@ module.exports = {
       const alertMsg = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");
       const alert = { msg: alertMsg, status: alertStatus };
+      const feature = await modelFeature.find({ itemId: itemId });
       const title = "Travleeday | Detail Item";
       res.render("admin/items/detail_item/detail_item", {
         title,
         alert,
         itemId,
+        feature,
       });
     } catch (error) {
       req.flash("alertMessage", `${error.msg}`);
