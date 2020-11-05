@@ -1,5 +1,6 @@
 const modelItem = require("../../models/model_item");
 const modelCategory = require("../../models/model_category");
+const modelFeature = require("../../models/model_feature");
 const modelImage = require("../../models/model_image");
 const fs = require("fs-extra");
 const path = require("path");
@@ -214,7 +215,38 @@ module.exports = {
       const alertStatus = req.flash("alertStatus");
       const alert = { msg: alertMsg, status: alertStatus };
       const title = "Travleeday | Detail Item";
-      res.render("admin/items/detail_item/detail_item", { title, alert });
+      res.render("admin/items/detail_item/detail_item", {
+        title,
+        alert,
+        itemId,
+      });
+    } catch (error) {
+      req.flash("alertMessage", `${error.msg}`);
+      req.flash("alertStatus", "danger");
+      res.redirect(`/admin/items/detail-item/${itemId}`);
+    }
+  },
+
+  addFeature: async (req, res) => {
+    const { name, qty, itemId } = req.body;
+    try {
+      if (!req.file) {
+        req.flash("alertMessage", "Image not Found");
+        req.flash("alertStatus", "danger");
+        res.redirect(`/admin/items/detail-item/${itemId}`);
+      }
+      const feature = await modelFeature.create({
+        name,
+        qty,
+        itemId,
+        imageUrl: `upload/${req.file.filename}`,
+      });
+      const item = await modelItem.findOne({ _id: itemId });
+      item.featureId.push({ _id: feature._id });
+      await item.save();
+      req.flash("alertMessage", "Success Add Feature");
+      req.flash("alertStatus", "success");
+      res.redirect(`/admin/items/detail-item/${itemId}`);
     } catch (error) {
       req.flash("alertMessage", `${error.msg}`);
       req.flash("alertStatus", "danger");

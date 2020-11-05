@@ -7,17 +7,19 @@ const {
   editItem,
   deleteItem,
   detailItem,
+  addFeature,
 } = require("../../controllers/control_admin/control_item");
-const { uploadMultiple } = require("../../middlewares/multer");
+const { uploadMultiple, upload } = require("../../middlewares/multer");
 
 router.get("/", viewItems);
 router.post("/", uploadMultiple, addItem);
 router.get("/show-image/:id", showImageItem);
 router.get("/:id", showEditItem);
 router.put("/:id", uploadMultiple, editItem);
-router.delete("/:id", deleteItem);
+router.delete("/:id", upload, deleteItem);
 
 // detail item
 router.get("/detail-item/:itemId", detailItem);
+router.post("/detail-item", upload, addFeature);
 
 module.exports = router;
