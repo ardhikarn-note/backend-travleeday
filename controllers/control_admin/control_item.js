@@ -255,4 +255,32 @@ module.exports = {
       res.redirect(`/admin/items/detail-item/${itemId}`);
     }
   },
+
+  editFeature: async (req, res) => {
+    const { id, name, qty, itemId } = req.body;
+    try {
+      const feature = await modelFeature.findOne({ _id: id });
+      if (req.file == undefined) {
+        feature.name = name;
+        feature.qty = qty;
+        await feature.save();
+        req.flash("alertMessage", "Success Update Feature");
+        req.flash("alertStatus", "success");
+        res.redirect(`/admin/items/detail-item/${itemId}`);
+      } else {
+        await fs.unlink(path.join(`uploads/${feature.imageUrl}`));
+        feature.name = name;
+        feature.qty = qty;
+        feature.imageUrl = `upload/${req.file.filename}`;
+        await feature.save();
+        req.flash("alertMessage", "Success Update Feature");
+        req.flash("alertStatus", "success");
+        res.redirect(`/admin/items/detail-item/${itemId}`);
+      }
+    } catch (error) {
+      req.flash("alertMessage", `${error.msg}`);
+      req.flash("alertStatus", "danger");
+      res.redirect(`/admin/items/detail-item/${itemId}`);
+    }
+  },
 };

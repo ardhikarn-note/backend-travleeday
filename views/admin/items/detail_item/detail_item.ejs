@@ -75,7 +75,7 @@
       </div>
     </div>
   </div>
-
+  <%- include('modal_edit.ejs') %>
   <%- include('../../../partials/js.ejs') %>
 
 <script>
@@ -83,4 +83,13 @@
     $('#dataTableActivity').DataTable()
   })
   CKEDITOR.replace(document.querySelector( '#description' ));
+  $('#dataTable').on('click', '.btn-update', function() {
+      let id = $(this).data('id');
+      let name = $(this).data('name')
+      let qty = $(this).data('qty')
+      $('#edit-modal-feature').modal('show')
+      $('.id').val(id)
+      $('.name').val(name)
+      $('.qty').val(qty)
+    })
 </script>
