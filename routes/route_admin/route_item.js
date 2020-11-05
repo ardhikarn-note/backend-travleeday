@@ -20,10 +20,4 @@ router.get("/:id", showEditItem);
 router.put("/:id", uploadMultiple, editItem);
 router.delete("/:id", upload, deleteItem);
 
-// detail item
-router.get("/detail-item/:itemId", detailItem);
-router.post("/detail-item/add-feature", upload, addFeature);
-router.put("/detail-item/edit-feature", upload, editFeature);
-router.delete("/detail-item/:itemId/feature/:id", deleteFeature);
-
 module.exports = router;
