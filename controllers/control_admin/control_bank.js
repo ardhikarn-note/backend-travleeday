@@ -12,7 +12,7 @@ module.exports = {
       const title = "Travleeday | Banks";
       res.render("admin/banks/view_banks", { title, alert, bank });
     } catch (error) {
-      req.flash("alertMessage", `${error.msg}`);
+      req.flash("alertMessage", `${error.message}`);
       req.flash("alertStatus", "danger");
       res.redirect("/admin/banks");
     }
@@ -31,7 +31,7 @@ module.exports = {
       req.flash("alertStatus", "success");
       res.redirect("/admin/banks");
     } catch (error) {
-      req.flash("alertMessage", `${error.msg}`);
+      req.flash("alertMessage", `${error.message}`);
       req.flash("alertStatus", "danger");
       res.redirect("/admin/banks");
     }
@@ -61,7 +61,7 @@ module.exports = {
         res.redirect("/admin/banks");
       }
     } catch (error) {
-      req.flash("alertMessage", `${error.msg}`);
+      req.flash("alertMessage", `${error.message}`);
       req.flash("alertStatus", "danger");
       res.redirect("/admin/banks");
     }
@@ -77,7 +77,7 @@ module.exports = {
       req.flash("alertStatus", "success");
       res.redirect("/admin/banks");
     } catch (error) {
-      req.flash("alertMessage", `${error.msg}`);
+      req.flash("alertMessage", `${error.message}`);
       req.flash("alertStatus", "danger");
       res.redirect("/admin/banks");
     }

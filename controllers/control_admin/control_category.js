@@ -14,7 +14,7 @@ module.exports = {
         title,
       });
     } catch (error) {
-      req.flash("alertMessage", `${error.msg}`);
+      req.flash("alertMessage", `${error.message}`);
       req.flash("alertStatus", "danger");
       res.redirect("/admin/categories");
     }
@@ -28,7 +28,7 @@ module.exports = {
       req.flash("alertStatus", "success");
       res.redirect("/admin/categories");
     } catch (error) {
-      req.flash("alertMessage", `${error.msg}`);
+      req.flash("alertMessage", `${error.message}`);
       req.flash("alertStatus", "danger");
       res.redirect("/admin/categories");
     }
@@ -44,7 +44,7 @@ module.exports = {
       req.flash("alertStatus", "success");
       res.redirect("/admin/categories");
     } catch (error) {
-      req.flash("alertMessage", `${error.msg}`);
+      req.flash("alertMessage", `${error.message}`);
       req.flash("alertStatus", "danger");
       res.redirect("/admin/categories");
     }
@@ -59,7 +59,7 @@ module.exports = {
       req.flash("alertStatus", "success");
       res.redirect("/admin/categories");
     } catch (error) {
-      req.flash("alertMessage", `${error.msg}`);
+      req.flash("alertMessage", `${error.message}`);
       req.flash("alertStatus", "danger");
       res.redirect("/admin/categories");
     }

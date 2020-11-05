@@ -32,7 +32,7 @@ module.exports = {
         action,
       });
     } catch (error) {
-      req.flash("alertMessage", `${error.msg}`);
+      req.flash("alertMessage", `${error.message}`);
       req.flash("alertStatus", "danger");
       res.redirect("/admin/items");
     }
@@ -66,7 +66,7 @@ module.exports = {
         res.redirect("/admin/items");
       }
     } catch (error) {
-      req.flash("alertMessage", `${error.msg}`);
+      req.flash("alertMessage", `${error.message}`);
       req.flash("alertStatus", "danger");
       res.redirect("/admin/items");
     }
@@ -91,7 +91,7 @@ module.exports = {
         action,
       });
     } catch (error) {
-      req.flash("alertMessage", `${error.msg}`);
+      req.flash("alertMessage", `${error.message}`);
       req.flash("alertStatus", "danger");
       res.redirect("/admin/items");
     }
@@ -124,7 +124,7 @@ module.exports = {
         action,
       });
     } catch (error) {
-      req.flash("alertMessage", `${error.msg}`);
+      req.flash("alertMessage", `${error.message}`);
       req.flash("alertStatus", "danger");
       res.redirect("/admin/items");
     }
@@ -174,7 +174,7 @@ module.exports = {
         res.redirect("/admin/items");
       }
     } catch (error) {
-      req.flash("alertMessage", `${error.msg}`);
+      req.flash("alertMessage", `${error.message}`);
       req.flash("alertStatus", "danger");
       res.redirect("/admin/items");
     }
@@ -192,7 +192,7 @@ module.exports = {
             image.remove();
           })
           .catch((error) => {
-            req.flash("alertMessage", `${error.msg}`);
+            req.flash("alertMessage", `${error.message}`);
             req.flash("alertStatus", "danger");
             res.redirect("/admin/items");
           });
@@ -202,7 +202,7 @@ module.exports = {
       req.flash("alertStatus", "success");
       res.redirect("/admin/items");
     } catch (error) {
-      req.flash("alertMessage", `${error.msg}`);
+      req.flash("alertMessage", `${error.message}`);
       req.flash("alertStatus", "danger");
       res.redirect("/admin/items");
     }
@@ -223,7 +223,7 @@ module.exports = {
         feature,
       });
     } catch (error) {
-      req.flash("alertMessage", `${error.msg}`);
+      req.flash("alertMessage", `${error.message}`);
       req.flash("alertStatus", "danger");
       res.redirect(`/admin/items/detail-item/${itemId}`);
     }
@@ -250,7 +250,7 @@ module.exports = {
       req.flash("alertStatus", "success");
       res.redirect(`/admin/items/detail-item/${itemId}`);
     } catch (error) {
-      req.flash("alertMessage", `${error.msg}`);
+      req.flash("alertMessage", `${error.message}`);
       req.flash("alertStatus", "danger");
       res.redirect(`/admin/items/detail-item/${itemId}`);
     }
@@ -278,7 +278,7 @@ module.exports = {
         res.redirect(`/admin/items/detail-item/${itemId}`);
       }
     } catch (error) {
-      req.flash("alertMessage", `${error.msg}`);
+      req.flash("alertMessage", `${error.message}`);
       req.flash("alertStatus", "danger");
       res.redirect(`/admin/items/detail-item/${itemId}`);
     }
