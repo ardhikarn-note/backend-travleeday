@@ -283,4 +283,30 @@ module.exports = {
       res.redirect(`/admin/items/detail-item/${itemId}`);
     }
   },
+
+  deleteFeature: async (req, res) => {
+    const { id, itemId } = req.params;
+    try {
+      const feature = await modelFeature.findOne({ _id: id });
+      const item = await modelItem
+        .findOne({ _id: itemId })
+        .populate("featureId");
+      for (i = 0; i < item.featureId.length; i++) {
+        if (item.featureId[i]._id.toString() === feature._id.toString()) {
+          item.featureId.pull({ _id: feature._id });
+          await item.save();
+        }
+      }
+      await fs.unlink(path.join(`uploads/${feature.imageUrl}`));
+      await feature.remove();
+      req.flash("alertMessage", "Success Delete Feature");
+      req.flash("alertStatus", "success");
+      res.redirect(`/admin/items/detail-item/${itemId}`);
+    } catch (error) {
+      console.log(error);
+      req.flash("alertMessage", `${error.message}`);
+      req.flash("alertStatus", "danger");
+      res.redirect(`/admin/items/detail-item/${itemId}`);
+    }
+  },
 };
