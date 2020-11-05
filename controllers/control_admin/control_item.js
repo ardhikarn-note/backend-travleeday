@@ -303,7 +303,6 @@ module.exports = {
       req.flash("alertStatus", "success");
       res.redirect(`/admin/items/detail-item/${itemId}`);
     } catch (error) {
-      console.log(error);
       req.flash("alertMessage", `${error.message}`);
       req.flash("alertStatus", "danger");
       res.redirect(`/admin/items/detail-item/${itemId}`);

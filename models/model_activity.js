@@ -10,19 +10,16 @@ const activitySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  itemId: [
-    {
-      type: ObjectId,
-      ref: "Item",
-    },
-  ],
+  itemId: {
+    type: ObjectId,
+    ref: "Item",
+  },
   imageUrl: {
     type: String,
     required: true,
   },
   isPopular: {
     type: Boolean,
-    required: true,
   },
 });
 
