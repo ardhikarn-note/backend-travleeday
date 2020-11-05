@@ -162,4 +162,29 @@ module.exports = {
       res.redirect(`/admin/items/detail-item/${itemId}`);
     }
   },
+
+  deleteActivity: async (req, res) => {
+    const { id, itemId } = req.params;
+    try {
+      const activity = await modelActivity.findOne({ _id: id });
+      const item = await modelItem
+        .findOne({ _id: itemId })
+        .populate("activityId");
+      for (i = 0; i < item.activityId.length; i++) {
+        if (item.activityId[i]._id.toString() === activity._id.toString()) {
+          item.activityId.pull({ _id: activity._id });
+          await item.save();
+        }
+      }
+      await fs.unlink(path.join(`uploads/${activity.imageUrl}`));
+      await activity.remove();
+      req.flash("alertMessage", "Success Delete Activity");
+      req.flash("alertStatus", "success");
+      res.redirect(`/admin/items/detail-item/${itemId}`);
+    } catch (error) {
+      req.flash("alertMessage", `${error.message}`);
+      req.flash("alertStatus", "danger");
+      res.redirect(`/admin/items/detail-item/${itemId}`);
+    }
+  },
 };

@@ -6,6 +6,7 @@ const {
   deleteFeature,
   addActivity,
   editActivity,
+  deleteActivity,
 } = require("../../controllers/control_admin/control_detail_item");
 const { upload } = require("../../middlewares/multer");
 
@@ -18,5 +19,6 @@ router.delete("/:itemId/feature/:id", deleteFeature);
 // activity
 router.post("/add-activity", upload, addActivity);
 router.put("/edit-activity", upload, editActivity);
+router.delete("/:itemId/activity/:id", deleteActivity);
 
 module.exports = router;

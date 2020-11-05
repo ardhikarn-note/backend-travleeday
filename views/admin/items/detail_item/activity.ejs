@@ -44,7 +44,7 @@
                     <td>
                       <form action="/admin/items/detail-item/<%= itemId %>/activity/<%= activity[i].id %>?_method=DELETE" method="POST">
                         <a href="javascript:void()" type="button" class="btn btn-warning btn-circle btn-sm btn-update" data-id="<%= activity[i].id %>" data-name="<%= activity[i].name %>" data-type="<%= activity[i].type %>" ><i class="fas fa-edit"></i></a>
-                        <button href="" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></button>
+                        <button type="submit" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></button>
                       </form>
                     </td>
                   </tr>
