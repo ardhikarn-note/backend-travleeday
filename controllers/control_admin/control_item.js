@@ -206,4 +206,19 @@ module.exports = {
       res.redirect("/admin/items");
     }
   },
+
+  detailItem: async (req, res) => {
+    const { itemId } = req.params;
+    try {
+      const alertMsg = req.flash("alertMessage");
+      const alertStatus = req.flash("alertStatus");
+      const alert = { msg: alertMsg, status: alertStatus };
+      const title = "Travleeday | Detail Item";
+      res.render("admin/items/detail_item/detail_item", { title, alert });
+    } catch (error) {
+      req.flash("alertMessage", `${error.msg}`);
+      req.flash("alertStatus", "danger");
+      res.redirect(`/admin/items/detail-item/${itemId}`);
+    }
+  },
 };
