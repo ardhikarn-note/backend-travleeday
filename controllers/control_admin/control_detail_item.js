@@ -134,4 +134,32 @@ module.exports = {
       res.redirect(`/admin/items/detail-item/${itemId}`);
     }
   },
+
+  editActivity: async (req, res) => {
+    const { id, name, type, itemId } = req.body;
+    try {
+      const activity = await modelActivity.findOne({ _id: id });
+      if (req.file == undefined) {
+        activity.name = name;
+        activity.type = type;
+        await activity.save();
+        req.flash("alertMessage", "Success Update Activity");
+        req.flash("alertStatus", "success");
+        res.redirect(`/admin/items/detail-item/${itemId}`);
+      } else {
+        await fs.unlink(path.join(`uploads/${activity.imageUrl}`));
+        activity.name = name;
+        activity.type = type;
+        activity.imageUrl = `upload/${req.file.filename}`;
+        await activity.save();
+        req.flash("alertMessage", "Success Update Activity");
+        req.flash("alertStatus", "success");
+        res.redirect(`/admin/items/detail-item/${itemId}`);
+      }
+    } catch (error) {
+      req.flash("alertMessage", `${error.message}`);
+      req.flash("alertStatus", "danger");
+      res.redirect(`/admin/items/detail-item/${itemId}`);
+    }
+  },
 };
