@@ -12,7 +12,9 @@ const {
   deleteFeature,
 } = require("../../controllers/control_admin/control_item");
 const { uploadMultiple, upload } = require("../../middlewares/multer");
+const auth = require("../../middlewares/auth");
 
+router.use(auth);
 router.get("/", viewItems);
 router.post("/", uploadMultiple, addItem);
 router.get("/show-image/:id", showImageItem);
