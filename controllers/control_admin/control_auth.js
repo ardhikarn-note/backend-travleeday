@@ -47,4 +47,9 @@ module.exports = {
       res.redirect("/admin/login");
     }
   },
+
+  logout: (req, res) => {
+    req.session.destroy();
+    res.redirect("/admin/login");
+  },
 };
