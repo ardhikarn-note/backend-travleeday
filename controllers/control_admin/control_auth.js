@@ -9,10 +9,14 @@ module.exports = {
       const alertStatus = req.flash("alertStatus");
       const alert = { msg: alertMsg, status: alertStatus };
       const title = "Travleeday | Login";
-      res.render("index", {
-        alert,
-        title,
-      });
+      if (req.session.user === null || req.session.user === undefined) {
+        res.render("index", {
+          alert,
+          title,
+        });
+      } else {
+        res.redirect("/admin/dashboard");
+      }
     } catch (error) {
       res.redirect("/admin/login");
     }
@@ -34,6 +38,10 @@ module.exports = {
         req.flash("alertStatus", "danger");
         res.redirect("/admin/login");
       }
+      req.session.user = {
+        id: user.id,
+        username: user.username,
+      };
       res.redirect("/admin/dashboard");
     } catch (error) {
       res.redirect("/admin/login");
