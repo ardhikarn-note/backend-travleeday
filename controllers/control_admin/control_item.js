@@ -29,6 +29,7 @@ module.exports = {
         title,
         item,
         action,
+        user: req.session.user,
       });
     } catch (error) {
       req.flash("alertMessage", `${error.message}`);
@@ -88,6 +89,7 @@ module.exports = {
         title,
         item,
         action,
+        user: req.session.user,
       });
     } catch (error) {
       req.flash("alertMessage", `${error.message}`);
@@ -121,6 +123,7 @@ module.exports = {
         title,
         item,
         action,
+        user: req.session.user,
       });
     } catch (error) {
       req.flash("alertMessage", `${error.message}`);

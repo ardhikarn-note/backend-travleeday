@@ -10,7 +10,12 @@ module.exports = {
       const alertStatus = req.flash("alertStatus");
       const alert = { msg: alertMsg, status: alertStatus };
       const title = "Travleeday | Banks";
-      res.render("admin/banks/view_banks", { title, alert, bank });
+      res.render("admin/banks/view_banks", {
+        title,
+        alert,
+        bank,
+        user: req.session.user,
+      });
     } catch (error) {
       req.flash("alertMessage", `${error.message}`);
       req.flash("alertStatus", "danger");
