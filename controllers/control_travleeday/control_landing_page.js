@@ -2,6 +2,7 @@ const modelItem = require("../../models/model_item");
 const modelBooking = require("../../models/model_booking");
 const modelActivity = require("../../models/model_activity");
 const modelCategory = require("../../models/model_category");
+const modelTestimonial = require("../../models/model_testimonial");
 
 module.exports = {
   landingPage: async (req, res) => {
@@ -33,14 +34,41 @@ module.exports = {
         .limit(3)
         .populate({
           path: "itemId",
-          select: "_id title imageId isPopular city country",
+          select: "_id title imageId sumBooking isPopular city country",
+          perDocumentLimit: 4,
+          options: { sort: { sumBooking: -1 } },
           populate: {
             path: "imageId",
             select: "_id imageUrl",
             perDocumentLimit: 1,
           },
-          perDocumentLimit: 4,
         });
+
+      // ISPOPULAR
+      for (let a = 0; a < category.length; a++) {
+        for (let x = 0; x < category[a].itemId.length; x++) {
+          const item = await modelItem.findOne({
+            _id: category[a].itemId[x]._id,
+          });
+          item.isPopular = false;
+          await item.save();
+          if (category[a].itemId[0] === category[a].itemId[x]) {
+            item.isPopular = true;
+            await item.save();
+          }
+        }
+      }
+
+      const testimonial = {
+        _id: "asd1293uasdads1",
+        imageUrl: "images/testimonial2.jpg",
+        name: "Happy Family",
+        rate: 4.55,
+        message:
+          "What a great trip with my family and I should try again next time soon ...",
+        familyName: "Angga",
+        familyOccupation: "Product Designer",
+      };
 
       res.status(200).json({
         hero: {
@@ -50,6 +78,7 @@ module.exports = {
         },
         mostPick,
         category,
+        testimonial,
       });
     } catch (error) {}
   },
