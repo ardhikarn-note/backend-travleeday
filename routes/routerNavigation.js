@@ -11,7 +11,7 @@ const routeAuth = require("./route_admin/route_auth");
 
 // API-TRAVLEEDAY
 const routeLandingPage = require("./route_travleeday/route_landing_page");
-// const routeDetailPage = require("./route_travleeday/route_detail_page");
+const routeDetailPage = require("./route_travleeday/route_detail_page");
 // const routeBookingApi = require("./route_travleeday/route_booking");
 
 // middleware Admin
@@ -25,7 +25,7 @@ router.use("/", routeAuth);
 
 // middleware API-Travleeday
 router.use("/landing-page", routeLandingPage);
-// router.use("/detail-page", routeDetailPage);
+router.use("/detail-page", routeDetailPage);
 // router.use("/booking", routeBookingApi);
 
 module.exports = router;
