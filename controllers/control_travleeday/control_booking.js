@@ -77,7 +77,7 @@ module.exports = {
 
       const booking = await modelBooking.create(newBooking);
 
-      res.status(200).json({ message: "Success Booking", booking });
+      res.status(201).json({ message: "Success Booking", booking });
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: "Internal Server Error" });
