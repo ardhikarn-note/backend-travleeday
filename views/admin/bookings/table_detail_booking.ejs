@@ -7,12 +7,28 @@
       <div class="col-4">
         <img src="http://localhost:3000/<%= booking.payments.proofPayment %>" alt="image" style="width: 100%; display: block">
         <div class="row mt-3">
-          <% if(booking.payments.status === 'Proses') { %>
+          <% if(booking.payments.status === 'Process') { %>
             <form action="/admin/bookings/detail-booking/confirmation/<%= booking.id %>?_method=PUT" method="POST" class="ml-5">
               <button href="" class="btn btn-success btn-sm"><i class="fas fa-check"></i> Confirmation</button>
             </form>
             <form action="/admin/bookings/detail-booking/reject/<%= booking.id %>?_method=PUT" method="POST" class="ml-auto mr-5">
               <button href="" class="btn btn-danger btn-sm"><i class="fas fa-times"></i> Reject</button>
+            </form>
+          <% } %>
+          <% if(booking.payments.status === 'Confirmed') { %>
+            <form action="/admin/bookings/detail-booking/process/<%= booking.id %>?_method=PUT" method="POST" class="ml-5">
+              <button href="" class="btn btn-warning btn-sm"><i class="fas fa-hourglass-half"></i> Process</button>
+            </form>
+            <form action="/admin/bookings/detail-booking/reject/<%= booking.id %>?_method=PUT" method="POST" class="ml-auto mr-5">
+              <button href="" class="btn btn-danger btn-sm"><i class="fas fa-times"></i> Reject</button>
+            </form>
+          <% } %>
+          <% if(booking.payments.status === 'Rejected') { %>
+            <form action="/admin/bookings/detail-booking/confirmation/<%= booking.id %>?_method=PUT" method="POST" class="ml-5">
+              <button href="" class="btn btn-success btn-sm"><i class="fas fa-check"></i> Confirmation</button>
+            </form>
+            <form action="/admin/bookings/detail-booking/process/<%= booking.id %>?_method=PUT" method="POST" class="ml-auto mr-5">
+              <button href="" class="btn btn-warning btn-sm"><i class="fas fa-hourglass-half"></i> Process</button>
             </form>
           <% } %>
         </div>

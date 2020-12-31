@@ -60,9 +60,23 @@ module.exports = {
     const { id } = req.params;
     try {
       const booking = await modelBooking.findOne({ _id: id });
-      booking.payments.status = "Reject";
+      booking.payments.status = "Rejected";
       await booking.save();
       req.flash("alertMessage", "Successfully reject booking");
+      req.flash("alertStatus", "success");
+      res.redirect(`/admin/bookings/detail-booking/${id}`);
+    } catch (error) {
+      res.redirect(`/admin/bookings/detail-booking/${id}`);
+    }
+  },
+
+  processBooking: async (req, res) => {
+    const { id } = req.params;
+    try {
+      const booking = await modelBooking.findOne({ _id: id });
+      booking.payments.status = "Process";
+      await booking.save();
+      req.flash("alertMessage", "Successfully process booking");
       req.flash("alertStatus", "success");
       res.redirect(`/admin/bookings/detail-booking/${id}`);
     } catch (error) {
