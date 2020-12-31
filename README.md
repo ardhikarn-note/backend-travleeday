@@ -39,4 +39,4 @@ PORT=3000 // PORT
 
 ## Postman Documentation
 
-Link Postman click [here](https://documenter.getpostman.com/view/11699211/TVYGdJNa)
+Link Postman click [here](https://documenter.getpostman.com/view/11699211/TVt1AQtg#4f11a0a1-a76f-484a-9d8d-d89caf3ffa92)
