@@ -7,12 +7,15 @@ const methodOverride = require("method-override");
 const session = require("express-session");
 const flash = require("connect-flash");
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost:27017/db_travleeday", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-  useFindAndModify: false,
-});
+mongoose.connect(
+  "mongodb+srv://ardhika:Indonesia3737@cluster0.pymgz.mongodb.net/db_travleeday?retryWrites=true&w=majority",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  }
+);
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
